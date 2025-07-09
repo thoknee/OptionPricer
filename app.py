@@ -149,10 +149,33 @@ elif model =="Binomial Tree":
     
 
 
-    results = binomialTree(T, K, S, r, sigma, steps, option_type).pricing()
+    results = binomialTree(T, K, S, r, sigma, steps, option_type)
     st.subheader("Results")
+    
+    price = results.pricing()
+        
+        
 
-    st.write(f"Price: {results}")
+    st.write(f"Price: {price}")
+    
+    if steps > 10:
+        st.write(f"\n To see price and option trees steps must be less than 10.")
+
+    if steps <= 10:
+        pt = st.checkbox("Show Price Tree")
+        ot = st.checkbox("Show Option Tree")
+        fig1 = results.plot_binomial_tree(results.stock_tree, title="Stock Price Tree")
+        fig2 = results.plot_binomial_tree(results.option_tree, title="Option Price Tree")
+        
+
+        fig1 = results.plot_binomial_tree(results.stock_tree, title="Stock Price Tree")
+        fig2 = results.plot_binomial_tree(results.option_tree, title="Option Price Tree")
+        
+        if pt:
+            st.pyplot(fig1)
+            
+        if ot:
+            st.pyplot(fig2)
     
 # elif model =="Trinomial Tree":
 #     st.title("Trinomial Tree Option Pricer")

@@ -3,7 +3,7 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import seaborn as sns
-
+import networkx as nx
 
 
 
@@ -206,8 +206,31 @@ class binomialTree:
                 )
 
         self.price = option_tree[0, 0]
+        
+        
+        self.stock_tree = stock_tree
+        self.option_tree = option_tree
         return self.price
+
+
+    def plot_binomial_tree(self, tree, title="Tree", node_labels=True):
+        steps = tree.shape[1] - 1
+        fig, ax = plt.subplots(figsize=(1.2 * steps, steps))
+
+        for i in range(steps + 1):
+            for j in range(i + 1):
+                x = i
+                y = steps - j
+                value = tree[j, i]
+                ax.plot(x, y, 'o', color='black')
+                if node_labels:
+                    ax.text(x, y + 0.3, f"{value:.2f}", ha='center', fontsize=8)
+
+        ax.set_title(title)
+        ax.axis('off')
+        return fig
     
+
 
 
 class trinomialTree:
