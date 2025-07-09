@@ -4,7 +4,10 @@ from scipy.stats import norm
 from priceCalc import blackScholes, binomialTree, trinomialTree, monteCarloOption
 
 
+def wide_space_default():
+    st.set_page_config(layout="wide")
 
+wide_space_default()
 
 model = st.sidebar.selectbox(
     "Choose Option Pricing Model:",
