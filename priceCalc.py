@@ -3,7 +3,6 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 import seaborn as sns
-import networkx as nx
 
 
 
